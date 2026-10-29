@@ -1,7 +1,2 @@
 package util;
-
-public record Command(
-        TransactionType type,
-        String accountNumber,
-        long amount
-) {}
+public record Command(TransactionType type, String accountNumber, long amount) {}

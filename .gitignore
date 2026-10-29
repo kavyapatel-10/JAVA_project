@@ -1,0 +1,6 @@
+out/
+MiniBank.jar
+data/
+logs/
+target/
+*.class
