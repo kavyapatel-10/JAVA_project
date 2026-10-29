@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class MiniBank {
 
-```
+
 // Record to store bank information
 record BankInfo(String name, String branch) {}
 
@@ -83,6 +83,6 @@ public static void main(String[] args) {
 
     sc.close();
 }
-```
+
 
 }
