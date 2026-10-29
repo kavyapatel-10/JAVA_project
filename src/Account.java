@@ -1,11 +1,11 @@
 import java.util.Objects;
 
-public class Account {
+public abstract class Account {
 
 
 private final String accountNumber;
 private String ownerName;
-private long balance;
+protected long balance;
 private boolean active;
 
 private static long accountCounter = 0;
@@ -15,7 +15,6 @@ private static String generateAccountNumber() {
     return String.format("AC%04d", accountCounter);
 }
 
-// Constructor with opening balance
 public Account(String ownerName, long openingBalance) {
     this.accountNumber = generateAccountNumber();
     this.ownerName = ownerName;
@@ -23,27 +22,29 @@ public Account(String ownerName, long openingBalance) {
     this.active = true;
 }
 
-// Constructor without opening balance
 public Account(String ownerName) {
     this(ownerName, 0);
 }
 
-// Deposit money
 public void deposit(long amount) {
     if (active && amount > 0) {
         balance += amount;
     }
 }
 
-// Withdraw money
 public boolean withdraw(long amount) {
-    if (active && amount > 0 && balance >= amount) {
+    if (active && canWithdraw(amount)) {
         balance -= amount;
         return true;
     }
 
     return false;
 }
+
+// Abstract methods
+public abstract double interestRate();
+
+public abstract boolean canWithdraw(long amount);
 
 // Getters
 public String getAccountNumber() {
@@ -62,7 +63,6 @@ public boolean isActive() {
     return active;
 }
 
-// Practical 3: Override toString()
 @Override
 public String toString() {
     return "Account{" +
@@ -72,7 +72,6 @@ public String toString() {
             '}';
 }
 
-// Practical 3: Override equals()
 @Override
 public boolean equals(Object o) {
     if (this == o) {
@@ -88,7 +87,6 @@ public boolean equals(Object o) {
     return accountNumber.equals(account.accountNumber);
 }
 
-// Practical 3: Override hashCode()
 @Override
 public int hashCode() {
     return Objects.hash(accountNumber);
